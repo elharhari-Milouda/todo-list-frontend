@@ -9,7 +9,7 @@ GetTodoList.defaultProps = {
     todoList:[],
 };
 
-function GetTodoList(props) {
+export default function GetTodoList(props) {
     const removeTodo = (status) => {
         if(status == false){
             status = true;
@@ -21,7 +21,6 @@ function GetTodoList(props) {
     const {todoList} = props;
     return (
         <div className='post-list'>
-            
             <div class="table-responsive">
                 <table class="table">
                   <thead class="bg-light">
@@ -31,7 +30,6 @@ function GetTodoList(props) {
                       <th>lastUpdateDate</th>
                       <th>deadline</th>
                       <th>done</th>
-                      
                     </tr>
                   </thead>
                   {todoList.map(post => ( 
@@ -52,5 +50,3 @@ function GetTodoList(props) {
         </div>
     );
 }
-
-export default GetTodoList
