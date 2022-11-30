@@ -1,23 +1,38 @@
-import logo from "./logo.svg";
 import "./App.css";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
+import GetTodoList from "./components/GetTodoList";
+import Template from "./components/Template";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
+  useEffect(() => {
+    async function fetchTodoList() {
+      try {
+        const requestUrl = "https://todo-emsi-api.herokuapp.com/task/personal";
+        const response = await fetch(requestUrl, { method: "GET" });
+        const responseJSON = await response.json();
+        console.log(responseJSON);
+        setTodoList(responseJSON);
+        console.log("**********");
+      } catch (e) {
+        console.log("//////////");
+        console.log(e);
+      }
+    }
+    fetchTodoList();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          PFA <code>Todo List</code> G4 Milouda
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // <div className="todo-app">
+    //  <TodoList />
+    // </div>
+    // <div className="App">
+    //   <GetTodoList todoList={todoList} />
+    // </div>
+    <div className="todo-app">
+      <Template />
     </div>
   );
 }
