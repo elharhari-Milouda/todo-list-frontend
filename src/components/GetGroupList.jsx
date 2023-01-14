@@ -5,11 +5,11 @@ import PopupShareTask from "./PopupShareTask";
 import { useEffect, useState } from "react";
 // import ButtonState from "./ButtonState"
 
-GetTodoList.propTypes = {
+GetGroupList.propTypes = {
     todoList: PropTypes.array,
 };
 
-GetTodoList.defaultProps = {
+GetGroupList.defaultProps = {
     todoList:[],
 };
 
@@ -30,7 +30,7 @@ class ButtonState extends React.Component {
 }
 
 
-export default function GetTodoList(props) {
+export default function GetGroupList(props) {
   const [buttonPopup, setButtonPopup] = useState(false);
   // const [task_id, setTaskId] = useState();
   

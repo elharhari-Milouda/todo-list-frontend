@@ -1,25 +1,34 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import GetTodoList from "./GetTodoList";
+import TodoForm from "./TodoForm";
+import TodoForm2 from "./TodoForm2";
+import axios, { Axios } from "axios";
 
 export default function Template() {
   const [todoList, setTodoList] = useState([]);
   useEffect(() => {
     async function fetchTodoList() {
       try {
-        const requestUrl = "https://todo-emsi-api.herokuapp.com/task/personal";
-        const response = await fetch(requestUrl, { method: "GET" });
-        const responseJSON = await response.json();
-        console.log(responseJSON);
+        const requestUrl = "http://localhost:8080/task/personal";
+
+        const options = {
+          headers: {
+            Authorization:
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWxvdWRhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3VzZXIvbG9naW4iLCJleHAiOjE2NzI2OTk5OTh9.AgX0BOquMH5XCvf-_iMh2FVJk1lgLBCS08hqUz4sI00",
+          },
+        };
+        const response = await axios(requestUrl, { method: "GET" }, options);
+        const responseJSON = response.data;
+        console.log("Data =============================", response.data);
         setTodoList(responseJSON);
-        console.log("**********");
       } catch (e) {
-        console.log("//////////");
+        console.log("errooor");
         console.log(e);
       }
     }
     fetchTodoList();
-  }, []);
+  }, [setTodoList]);
 
   return (
     <div>
@@ -59,84 +68,56 @@ export default function Template() {
               </a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link"
-                data-toggle="collapse"
-                href="#ui-basic"
-                aria-expanded="false"
-                aria-controls="ui-basic"
-              >
-                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-                <span class="menu-title">Basic UI Elements</span>
-                <i class="menu-arrow"></i>
-              </a>
-              <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/ui-features/buttons.html">
-                      Buttons
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/ui-features/dropdowns.html">
-                      Dropdowns
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a
-                      class="nav-link"
-                      href="pages/ui-features/typography.html"
-                    >
-                      Typography
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/icons/mdi.html">
-                <i class="mdi mdi-contacts menu-icon"></i>
-                <span class="menu-title">Icons</span>
+              <a class="nav-link" href="index.html">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Create task</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                <span class="menu-title">Forms</span>
+              <a class="nav-link" href="index.html">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Tasks</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/charts/chartjs.html">
-                <i class="mdi mdi-chart-bar menu-icon"></i>
-                <span class="menu-title">Charts</span>
+              <a class="nav-link" href="index.html">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Create task for user</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/tables/basic-table.html">
-                <i class="mdi mdi-table-large menu-icon"></i>
-                <span class="menu-title">Tables</span>
+              <a class="nav-link" href="index.html">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Create group</span>
               </a>
             </li>
             <li class="nav-item">
-              <span class="nav-link" href="#">
-                <span class="menu-title">Docs</span>
-              </span>
+              <a class="nav-link" href="index.html">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Groups</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link"
-                href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html"
-              >
-                <i class="mdi mdi-file-document-box menu-icon"></i>
-                <span class="menu-title">Documentation</span>
+              <a class="nav-link" href="index.html">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Personal tasks</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Shared tasks</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">Group tasks</span>
               </a>
             </li>
             <li class="nav-item sidebar-actions">
               <div class="nav-link">
                 <div class="mt-4">
-                  <div class="border-none">
-                    <p class="text-black">Notification</p>
-                  </div>
                   <ul class="mt-4 pl-0">
                     <li>Sign Out</li>
                   </ul>
@@ -402,15 +383,9 @@ export default function Template() {
           </nav>
           <div class="main-panel">
             <div class="content-wrapper pb-0">
-              <div class="page-header flex-wrap">
-                <h3 class="mb-0"> List of Tasks </h3>
-                <div class="d-flex">
-                  <button type="button" class="btn btn-sm ml-3 btn-success">
-                    {" "}
-                    Add Task{" "}
-                  </button>
-                </div>
-              </div>
+              <TodoForm todoList={todoList} />
+              {/* <TodoForm2 todoList={todoList} /> */}
+
               <GetTodoList todoList={todoList} />
             </div>
             <footer class="footer">

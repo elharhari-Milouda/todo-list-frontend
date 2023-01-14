@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import moment from "moment";
 
-function TodoForm(props) {
+function TodoForm2(props) {
   const requestUrl = "http://localhost:8080/task/personal";
   const { todoList } = props;
   const [data, setData] = useState({
@@ -80,41 +80,9 @@ function TodoForm(props) {
             </div>
           </div>
         </div>
-        <div class="col-md-6 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <div class="add-items d-flex flex-wrap flex-sm-nowrap">
-                <input
-                  type="text"
-                  class="form-control todo-list-input flex-grow"
-                  placeholder="Task name"
-                  value={data.name}
-                  name="name"
-                  onChange={(e) => handle(e)}
-                  id="name"
-                  //ref={inputRef}
-                />
-                <input
-                  type="date"
-                  value={data.deadline}
-                  name="deadline"
-                  onChange={(e) => handle(e)}
-                  id="deadline"
-                />
-
-                <button
-                  class="add btn btn-primary font-weight-regular text-nowrap"
-                  id="add-task"
-                >
-                  Add Task
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </form>
   );
 }
 
-export default TodoForm;
+export default TodoForm2;
